@@ -32,10 +32,10 @@
                 <td>Rp{{ number_format($item['harga'],0,',','.') }}</td>
                 <td>Rp{{ number_format($item['harga'] * $item['jumlah'],0,',','.') }}</td>
                 <td>
-                    <form action="#" method="POST" style="display:inline;">
+                    <form action="{{ route('cart.remove', $index) }}" method="POST" style="display:inline;">
                         @csrf
-                        <input type="hidden" name="index" value="{{ $index }}">
-                        <button class="btn btn-danger btn-sm" disabled>Hapus</button>
+                        @method('DELETE')
+                        <button class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus item ini?')">Hapus</button>
                     </form>
                 </td>
             </tr>

@@ -9,6 +9,7 @@ use App\Http\Controllers\MakananController;
 use App\Http\Controllers\MinumanController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Models\Makanan;
 use App\Models\Minuman;
 use App\Models\Penjualan;
@@ -141,3 +142,6 @@ Route::post('/historypenjualan/deleteSelected', function(Illuminate\Http\Request
     }
     return redirect()->route('historypenjualan.index')->with('success', 'History terpilih berhasil dihapus!');
 })->name('historypenjualan.deleteSelected');
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::delete('/cart/remove/{index}', [CartController::class, 'remove'])->name('cart.remove');

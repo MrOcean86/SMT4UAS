@@ -25,9 +25,9 @@ class AuthController extends Controller
         if ($user && $request->password == $user->password) {
             Session::put('user', $user);
             if ($user->role == 'admin') {
-                return redirect()->route('makanan.index');
-            } else {
                 return redirect()->route('penjualan.index');
+            } else {
+                return redirect()->route('home');
             }
         }
         return back()->withErrors(['login' => 'Username atau password salah']);

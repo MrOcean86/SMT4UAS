@@ -15,7 +15,9 @@ class MakananController extends Controller
     public function create() {
         return view('makanan.create');
     }
+    
 
+    //upload ke database
     public function store(Request $request) {
         $request->validate([
             'nama' => 'required',

@@ -36,10 +36,10 @@
     <p class="lead">Restoran Sederhana adalah tempat terbaik untuk menikmati makanan dan minuman lezat dengan harga terjangkau. Kami menyediakan berbagai menu favorit keluarga, mulai dari makanan tradisional hingga minuman segar.</p>
     <hr>
     <h4>Alamat</h4>
-    <p>Jl. Contoh No. 123, Kota Anda</p>
+    <p>Jl. Cokolio,Kepanjen, Kota Anda</p>
     <h4>Jam Operasional</h4>
     <p>Setiap hari, 09.00 - 22.00 WIB</p>
     <h4>Kontak</h4>
-    <p>Telepon: 0812-3456-7890</p>
+    <p>Telepon: 0896-8181-9685</p>
 </div>
 @endsection

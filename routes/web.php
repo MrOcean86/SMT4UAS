@@ -25,9 +25,6 @@ Route::get('/user/{id}/name/{name}', [UserController::class, 'show'])->name('use
 Route::get('/register', [App\Http\Controllers\UserController::class, 'registerForm'])->name('register');
 Route::post('/register', [App\Http\Controllers\UserController::class, 'register']);
 
-// POS Route
-Route::get('/pos', [POSController::class, 'index'])->name('pos.index');
-
 Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('logout', [AuthController::class, 'logout'])->name('logout');

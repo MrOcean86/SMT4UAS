@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 07, 2025 at 05:55 AM
+-- Generation Time: Jul 07, 2025 at 03:41 PM
 -- Server version: 8.4.3
 -- PHP Version: 8.3.16
 
@@ -169,7 +169,7 @@ ALTER TABLE `minuman`
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

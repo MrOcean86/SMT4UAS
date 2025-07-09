@@ -27,7 +27,11 @@
                     <h5 class="card-title">{{ $makanan->nama }}</h5>
                     <p class="card-text">{{ $makanan->deskripsi }}</p>
                     <p class="card-text"><strong>Harga:</strong> Rp{{ number_format($makanan->harga,0,',','.') }}</p>
-                    <a href="{{ route('order.form', ['type'=>'makanan','id'=>$makanan->id]) }}" class="btn btn-success">Pesan</a>
+                    @if(session('user'))
+                        <a href="{{ route('order.form', ['type'=>'makanan','id'=>$makanan->id]) }}" class="btn btn-success">Pesan</a>
+                    @else
+                        <a href="{{ route('login') }}" class="btn btn-success">Pesan</a>
+                    @endif
                 </div>
             </div>
         </div>

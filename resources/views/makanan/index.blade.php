@@ -11,6 +11,7 @@
                 <th>Harga</th>
                 <th>Kategori</th>
                 <th>Deskripsi</th>
+                <th>Stok</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -22,12 +23,13 @@
                 <td>{{ $makanan->harga }}</td>
                 <td>{{ $makanan->kategori }}</td>
                 <td>{{ $makanan->deskripsi }}</td>
+                <td>{{ $makanan->stok }}</td>
                 <td>
                     <a href="{{ route('makanan.edit', $makanan->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('makanan.destroy', $makanan->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
+                        <button type="submiqt" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus?')">Hapus</button>
                     </form>
                 </td>
             </tr>

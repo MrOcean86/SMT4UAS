@@ -21,6 +21,10 @@
             <label>Deskripsi</label>
             <textarea name="deskripsi" class="form-control">{{ $minuman->deskripsi }}</textarea>
         </div>
+        <div class="mb-3">
+            <label>Stok</label>
+            <input type="number" name="stok" class="form-control" value="{{ $minuman->stok }}" min="0" required>
+        </div>
         <button type="submit" class="btn btn-success">Update</button>
         <a href="{{ route('minuman.index') }}" class="btn btn-secondary">Kembali</a>
     </form>

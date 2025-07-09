@@ -8,6 +8,6 @@ class Minuman extends Model
 {
     protected $table = 'minuman';
     protected $fillable = [
-        'nama', 'harga', 'kategori', 'deskripsi', 'foto'
+        'nama', 'harga', 'kategori', 'deskripsi', 'foto', 'stok'
     ];
 }

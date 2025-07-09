@@ -8,6 +8,6 @@ class Makanan extends Model
 {
     protected $table = 'makanan';
     protected $fillable = [
-        'nama', 'harga', 'kategori', 'deskripsi', 'foto'
+        'nama', 'harga', 'kategori', 'deskripsi', 'foto', 'stok'
     ];
 }

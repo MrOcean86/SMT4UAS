@@ -11,6 +11,7 @@
                 <th>Harga</th>
                 <th>Kategori</th>
                 <th>Deskripsi</th>
+                <th>Stok</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ $minuman->harga }}</td>
                 <td>{{ $minuman->kategori }}</td>
                 <td>{{ $minuman->deskripsi }}</td>
+                <td>{{ $minuman->stok }}</td>
                 <td>
                     <a href="{{ route('minuman.edit', $minuman->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('minuman.destroy', $minuman->id) }}" method="POST" style="display:inline-block;">

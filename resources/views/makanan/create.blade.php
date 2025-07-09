@@ -21,6 +21,10 @@
             <textarea name="deskripsi" class="form-control"></textarea>
         </div>
         <div class="mb-3">
+            <label for="stok" class="form-label">Stok</label>
+            <input type="number" class="form-control" id="stok" name="stok" min="0" value="{{ old('stok', 0) }}" required>
+        </div>
+        <div class="mb-3">
             <label>Foto</label>
             <input type="file" name="foto" class="form-control" onchange="previewFoto(event)">
             <img id="preview-img" src="#" alt="Preview" style="display:none;max-width:200px;margin-top:10px;"/>

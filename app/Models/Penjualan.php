@@ -8,7 +8,7 @@ class Penjualan extends Model
 {
     protected $table = 'penjualan';
     protected $fillable = [
-        'tanggal', 'id_makanan', 'id_minuman', 'id_user', 'jumlah', 'total_harga', 'foto', 'nama_pemesan', 'alamat', 'no_hp'
+        'tanggal', 'id_makanan', 'id_minuman', 'id_user', 'jumlah', 'total_harga', 'foto', 'nama_pemesan', 'alamat', 'no_hp', 'status'
     ];
     public $timestamps = false;
 

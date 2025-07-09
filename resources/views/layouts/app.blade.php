@@ -42,10 +42,12 @@
                         @else
                             <li class="nav-item"><a class="nav-link" href="/smt4uas/public/penjualan">Penjualan</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}">Keranjang Belanja</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{{ route('user.status_pesanan') }}">Status Pesanan</a></li>
                         @endif
                     @else
                     <li class="nav-item"><a class="nav-link" href="/smt4uas/public/penjualan">Penjualan</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}">Keranjang Belanja</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('user.status_pesanan') }}">Status Pesanan</a></li>
                     @endif
                 </ul>
                 <ul class="navbar-nav ms-auto d-none d-lg-flex">

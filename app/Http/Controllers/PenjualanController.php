@@ -26,6 +26,7 @@ class PenjualanController extends Controller
             $file->move(public_path('img'), $filename);
             $data['foto'] = $filename;
         }
+        $data['status'] = 'menunggu'; 
         Penjualan::create($data);
         return redirect()->route('penjualan.index');
     }

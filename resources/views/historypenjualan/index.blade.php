@@ -4,6 +4,7 @@
     <h1>History Penjualan</h1>
     <form action="{{ route('historypenjualan.deleteSelected') }}" method="POST" id="form-delete-selected" onsubmit="return confirm('Yakin ingin menghapus history yang dipilih?');">
         @csrf
+        <!-- Form ini hanya untuk hapus terpilih, method POST -->
         <button type="submit" class="btn btn-danger mb-3">Hapus Terpilih</button>
         <table class="table table-bordered">
             <thead>
@@ -18,6 +19,7 @@
                     <th>No HP</th>
                     <th>Jumlah</th>
                     <th>Total Harga</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +35,18 @@
                 <td>{{ $penjualan->no_hp ?? '-' }}</td>
                 <td>{{ $penjualan->jumlah }}</td>
                 <td>Rp{{ number_format($penjualan->total_harga,0,',','.') }}</td>
+                <td>
+                    <!-- Form update status mengarah ke StatusController -->
+                    <form action="{{ route('penjualan.updateStatus', $penjualan->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('PATCH')
+                        <select name="status" onchange="this.form.submit()" class="form-select form-select-sm">
+                            <option value="menunggu" {{ $penjualan->status == 'menunggu' ? 'selected' : '' }}>Menunggu</option>
+                            <option value="sedang dimasak" {{ $penjualan->status == 'sedang dimasak' ? 'selected' : '' }}>Sedang Dimasak</option>
+                            <option value="selesai" {{ $penjualan->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
+                        </select>
+                    </form>
+                </td>
             </tr>
             @endforeach
             </tbody>

@@ -12,6 +12,7 @@
             <h5 class="card-title">{{ $item->nama }}</h5>
             <p class="card-text">{{ $item->deskripsi }}</p>
             <p class="card-text"><strong>Harga:</strong> Rp{{ number_format($item->harga,0,',','.') }}</p>
+            <p class="card-text"><strong>Stok Tersisa:</strong> {{ $item->stok }}</p>
         </div>
     </div>
     <form action="{{ route('order.submit', ['type'=>$type, 'id'=>$item->id]) }}" method="POST">

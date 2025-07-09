@@ -29,4 +29,24 @@ class UserController extends Controller
         ]);
         return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login!');
     }
+
+    public function statusPesanan()
+    {
+        $user = session('user');
+        $penjualans = [];
+        if ($user) {
+            $query = \App\Models\Penjualan::with(['makanan', 'minuman'])
+                ->where('id_user', $user->id_user);
+            $tanggal_awal = request('tanggal_awal');
+            $tanggal_akhir = request('tanggal_akhir');
+            if ($tanggal_awal) {
+                $query->where('tanggal', '>=', $tanggal_awal);
+            }
+            if ($tanggal_akhir) {
+                $query->where('tanggal', '<=', $tanggal_akhir);
+            }
+            $penjualans = $query->orderByDesc('tanggal')->get();
+        }
+        return view('user.status_pesanan', compact('penjualans'));
+    }
 }

@@ -93,29 +93,43 @@ Route::post('/cart/checkout', function(Illuminate\Http\Request $request) {
     $no_hp = $request->no_hp;
     foreach ($cart as $item) {
         if ($item['type'] == 'makanan') {
-            \App\Models\Penjualan::create([
-                'tanggal' => now(),
-                'id_makanan' => $item['id'],
-                'id_minuman' => null,
-                'id_user' => $id_user,
-                'jumlah' => $item['jumlah'],
-                'total_harga' => $item['harga'] * $item['jumlah'],
-                'nama_pemesan' => $nama_pemesan,
-                'alamat' => $alamat,
-                'no_hp' => $no_hp
-            ]);
+            $makanan = \App\Models\Makanan::find($item['id']);
+            if ($makanan && $makanan->stok >= $item['jumlah']) {
+                $makanan->stok -= $item['jumlah'];
+                $makanan->save();
+                \App\Models\Penjualan::create([
+                    'tanggal' => now(),
+                    'id_makanan' => $item['id'],
+                    'id_minuman' => null,
+                    'id_user' => $id_user,
+                    'jumlah' => $item['jumlah'],
+                    'total_harga' => $item['harga'] * $item['jumlah'],
+                    'nama_pemesan' => $nama_pemesan,
+                    'alamat' => $alamat,
+                    'no_hp' => $no_hp
+                ]);
+            } else {
+                return redirect()->route('cart.index')->with('error', 'Stok makanan tidak cukup untuk ' . $item['nama']);
+            }
         } else if ($item['type'] == 'minuman') {
-            \App\Models\Penjualan::create([
-                'tanggal' => now(),
-                'id_makanan' => null,
-                'id_minuman' => $item['id'],
-                'id_user' => $id_user,
-                'jumlah' => $item['jumlah'],
-                'total_harga' => $item['harga'] * $item['jumlah'],
-                'nama_pemesan' => $nama_pemesan,
-                'alamat' => $alamat,
-                'no_hp' => $no_hp
-            ]);
+            $minuman = \App\Models\Minuman::find($item['id']);
+            if ($minuman && $minuman->stok >= $item['jumlah']) {
+                $minuman->stok -= $item['jumlah'];
+                $minuman->save();
+                \App\Models\Penjualan::create([
+                    'tanggal' => now(),
+                    'id_makanan' => null,
+                    'id_minuman' => $item['id'],
+                    'id_user' => $id_user,
+                    'jumlah' => $item['jumlah'],
+                    'total_harga' => $item['harga'] * $item['jumlah'],
+                    'nama_pemesan' => $nama_pemesan,
+                    'alamat' => $alamat,
+                    'no_hp' => $no_hp
+                ]);
+            } else {
+                return redirect()->route('cart.index')->with('error', 'Stok minuman tidak cukup untuk ' . $item['nama']);
+            }
         }
     }
     session()->forget('cart');
@@ -145,3 +159,9 @@ Route::post('/historypenjualan/deleteSelected', function(Illuminate\Http\Request
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::delete('/cart/remove/{index}', [CartController::class, 'remove'])->name('cart.remove');
+
+// Route untuk update status penjualan (hanya admin, PATCH)
+Route::middleware(['auth.session'])->patch('/penjualan/{id}/status', [\App\Http\Controllers\StatusController::class, 'update'])->name('penjualan.updateStatus');
+
+// Route untuk status pesanan user
+Route::get('/status-pesanan', [\App\Http\Controllers\UserController::class, 'statusPesanan'])->name('user.status_pesanan');

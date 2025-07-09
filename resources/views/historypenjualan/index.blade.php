@@ -2,14 +2,14 @@
 @section('content')
 <div class="container">
     <h1>History Penjualan</h1>
-    <form method="GET" action="{{ route('historypenjualan.index') }}" class="row g-3 mb-3">
-        <div class="col-md-3">
+    <form method="GET" action="{{ route('historypenjualan.index') }}" class="row g-2 mb-3 align-items-end">
+        <div class="col-md-2">
             <input type="date" name="tanggal" class="form-control" value="{{ request('tanggal') }}" placeholder="Tanggal">
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <input type="text" name="nama_pemesan" class="form-control" value="{{ request('nama_pemesan') }}" placeholder="Nama Pemesan">
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <input type="text" name="nama_pesanan" class="form-control" value="{{ request('nama_pesanan') }}" placeholder="Nama Pesanan">
         </div>
         <div class="col-md-2">
@@ -20,15 +20,16 @@
                 <option value="selesai" {{ request('status') == 'selesai' ? 'selected' : '' }}>Selesai</option>
             </select>
         </div>
-        <div class="col-md-1">
-            <select name="sort" class="form-select">
+        <div class="col-md-2">
+            <label for="sort" class="form-label mb-0">Urutkan</label>
+            <select name="sort" id="sort" class="form-select">
                 <option value="desc" {{ request('sort', 'desc') == 'desc' ? 'selected' : '' }}>Terbaru</option>
                 <option value="asc" {{ request('sort') == 'asc' ? 'selected' : '' }}>Terlama</option>
             </select>
         </div>
-        <div class="col-md-12 mt-2">
-            <button type="submit" class="btn btn-primary">Filter</button>
-            <a href="{{ route('historypenjualan.index') }}" class="btn btn-secondary">Reset Filter</a>
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-fill">Filter</button>
+            <a href="{{ route('historypenjualan.index') }}" class="btn btn-secondary flex-fill">Reset</a>
         </div>
     </form>
     

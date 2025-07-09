@@ -73,7 +73,7 @@ class PenjualanController extends Controller
             $query->where('status', $request->status);
         }
         $sort = $request->get('sort', 'desc');
-        $penjualans = $query->orderBy('id', $sort)->paginate(10)->withQueryString();
+        $penjualans = $query->orderBy('tanggal', $sort)->paginate(10)->withQueryString();
         return view('historypenjualan.index', compact('penjualans'));
     }
 }

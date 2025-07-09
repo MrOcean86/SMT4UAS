@@ -3,26 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+    // Tampilkan profil user
     public function show($id, $name)
     {
         return view('user.profile', compact('id', 'name'));
     }
 
+    // Tampilkan form registrasi
     public function registerForm()
     {
         return view('auth.register');
     }
 
+    // Proses registrasi user baru
     public function register(Request $request)
     {
         $request->validate([
             'username' => 'required|unique:users,username',
             'password' => 'required|min:3',
         ]);
-        \DB::table('users')->insert([
+        // Cek apakah username sudah ada
+        $exists = \App\Models\User::where('username', $request->username)->exists();
+        if ($exists) {
+            return redirect()->back()->withInput()->with('error', 'Username sudah terdaftar, silakan gunakan username lain.');
+        }
+        DB::table('users')->insert([
             'username' => $request->username,
             'password' => $request->password, // plain, bisa di-hash jika mau
             'role' => 'pembeli',
@@ -30,6 +39,7 @@ class UserController extends Controller
         return redirect()->route('login')->with('success', 'Akun berhasil dibuat, silakan login!');
     }
 
+    // Tampilkan status pesanan user (dengan filter tanggal)
     public function statusPesanan()
     {
         $user = session('user');

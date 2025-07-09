@@ -48,4 +48,32 @@ class PenjualanController extends Controller
         $penjualan->delete();
         return redirect()->route('penjualan.index');
     }
+
+    // History penjualan dengan filter
+    public function history(\Illuminate\Http\Request $request)
+    {
+        $query = \App\Models\Penjualan::with(['makanan', 'user', 'minuman']);
+        if ($request->filled('tanggal')) {
+            $query->whereDate('tanggal', $request->tanggal);
+        }
+        if ($request->filled('nama_pemesan')) {
+            $query->where('nama_pemesan', 'like', '%'.$request->nama_pemesan.'%');
+        }
+        if ($request->filled('nama_pesanan')) {
+            $query->where(function($q) use ($request) {
+                $q->whereHas('makanan', function($q2) use ($request) {
+                    $q2->where('nama', 'like', '%'.$request->nama_pesanan.'%');
+                })
+                ->orWhereHas('minuman', function($q2) use ($request) {
+                    $q2->where('nama', 'like', '%'.$request->nama_pesanan.'%');
+                });
+            });
+        }
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+        $sort = $request->get('sort', 'desc');
+        $penjualans = $query->orderBy('id', $sort)->paginate(10)->withQueryString();
+        return view('historypenjualan.index', compact('penjualans'));
+    }
 }

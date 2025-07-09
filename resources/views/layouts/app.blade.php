@@ -38,7 +38,6 @@
                             <li class="nav-item"><a class="nav-link" href="/smt4uas/public/minuman">Minuman</a></li>
                             <li class="nav-item"><a class="nav-link" href="/smt4uas/public/penjualan">Penjualan</a></li>
                             <li class="nav-item"><a class="nav-link" href="/smt4uas/public/historypenjualan">History Penjualan</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}">Keranjang Belanja</a></li>
                         @else
                             <li class="nav-item"><a class="nav-link" href="/smt4uas/public/penjualan">Penjualan</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('cart.index') }}">Keranjang Belanja</a></li>

@@ -64,10 +64,8 @@ Route::post('/order/{type}/{id}', function(Illuminate\Http\Request $request, $ty
     return redirect()->route('cart.index')->with('success', 'Berhasil ditambahkan ke keranjang!');
 })->name('order.submit');
 
-Route::get('/historypenjualan', function() {
-    $penjualans = Penjualan::with(['makanan', 'user'])->get();
-    return view('historypenjualan.index', compact('penjualans'));
-})->name('historypenjualan.index');
+// Ganti route historypenjualan agar mendukung filter
+Route::get('/historypenjualan', [\App\Http\Controllers\PenjualanController::class, 'history'])->name('historypenjualan.index');
 
 Route::get('/penjualan', function() {
     $makanans = Makanan::all();

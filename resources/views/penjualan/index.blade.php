@@ -28,7 +28,9 @@
                     <p class="card-text">{{ $makanan->deskripsi }}</p>
                     <p class="card-text"><strong>Harga:</strong> Rp{{ number_format($makanan->harga,0,',','.') }}</p>
                     <p class="card-text"><strong>Stok:</strong> {{ $makanan->stok }}</p>
-                    @if($makanan->stok > 0)
+                    @if(session('user') && session('user')->role == 'admin')
+                        {{-- Admin tidak bisa memesan, tidak tampil tombol pesan atau badge stok habis --}}
+                    @elseif($makanan->stok > 0)
                         @if(session('user'))
                             <a href="{{ route('order.form', ['type'=>'makanan','id'=>$makanan->id]) }}" class="btn btn-success">Pesan</a>
                         @else
@@ -57,7 +59,9 @@
                     <p class="card-text">{{ $minuman->deskripsi }}</p>
                     <p class="card-text"><strong>Harga:</strong> Rp{{ number_format($minuman->harga,0,',','.') }}</p>
                     <p class="card-text"><strong>Stok:</strong> {{ $minuman->stok }}</p>
-                    @if($minuman->stok > 0)
+                    @if(session('user') && session('user')->role == 'admin')
+                        {{-- Admin tidak bisa memesan, tidak tampil tombol pesan atau badge stok habis --}}
+                    @elseif($minuman->stok > 0)
                         <a href="{{ route('order.form', ['type'=>'minuman','id'=>$minuman->id]) }}" class="btn btn-success">Pesan</a>
                     @else
                         <span class="badge bg-danger">Stok Habis</span>
